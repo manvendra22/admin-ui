@@ -12,6 +12,7 @@
     "react": "^17.0.0",
     "react-dom": "^17.0.0",
     "react-query": "^3.33.7",
+    "react-table": "^7.7.0",
     "tailwindcss": "^2.2.19"
   },
   "devDependencies": {

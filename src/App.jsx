@@ -1,6 +1,8 @@
 import { API_KEY } from "./config";
 import { useQuery } from "react-query";
 
+import Table from "./Components/Table/Table";
+
 function App() {
   const { isLoading, error, data } = useQuery("repoData", () =>
     fetch(API_KEY).then((res) => {
@@ -17,9 +19,11 @@ function App() {
     return "Error";
   }
 
-  console.log({ data });
-
-  return <div className="App">Admin UI</div>;
+  return (
+    <div className="App">
+      <Table data={data} />
+    </div>
+  );
 }
 
 export default App;
