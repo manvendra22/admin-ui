@@ -20,7 +20,7 @@ function App() {
   }
 
   return (
-    <div class="container mx-auto p-4">
+    <div className="container mx-auto p-4 mt-8">
       <Table data={data} />
     </div>
   );
