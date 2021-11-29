@@ -1,5 +1,12 @@
-import { forwardRef, useRef, useEffect } from "react";
-import { useTable, usePagination, useRowSelect } from "react-table";
+import { useState, forwardRef, useRef, useEffect } from "react";
+import {
+  useTable,
+  usePagination,
+  useRowSelect,
+  useGlobalFilter,
+  // useAsyncDebounce,
+} from "react-table";
+import { useDebouncedCallback } from "use-debounce";
 
 import TableLayout from "./TableLayout";
 import TableFooter from "./TableFooter";
@@ -13,35 +20,28 @@ function TableInstance({ columns, data, deleteSelected }) {
     page,
     canPreviousPage,
     canNextPage,
-    // pageOptions,
-    // pageCount,
     gotoPage,
     nextPage,
     previousPage,
-    // setPageSize,
-    // selectedFlatRows,
-    state: { pageIndex, pageSize, selectedRowIds },
+    setGlobalFilter,
+    state,
   } = useTable(
     {
       columns,
       data,
     },
+    useGlobalFilter,
     usePagination,
     useRowSelect,
     (hooks) => {
       hooks.visibleColumns.push((columns) => [
-        // Let's make a column for selection
         {
           id: "selection",
-          // The header can use the table's getToggleAllRowsSelectedProps method
-          // to render a checkbox
           Header: ({ getToggleAllPageRowsSelectedProps }) => (
             <div>
               <IndeterminateCheckbox {...getToggleAllPageRowsSelectedProps()} />
             </div>
           ),
-          // The cell can use the individual row's getToggleRowSelectedProps method
-          // to the render a checkbox
           Cell: ({ row }) => (
             <div>
               <IndeterminateCheckbox {...row.getToggleRowSelectedProps()} />
@@ -51,11 +51,7 @@ function TableInstance({ columns, data, deleteSelected }) {
         ...columns,
         {
           id: "actions",
-          // The header can use the table's getToggleAllRowsSelectedProps method
-          // to render a checkbox
           Header: () => <div>Actions</div>,
-          // The cell can use the individual row's getToggleRowSelectedProps method
-          // to the render a checkbox
           Cell: ({ row }) => (
             <div>
               <Actions row={row} deleteSelected={deleteSelected} />
@@ -71,6 +67,10 @@ function TableInstance({ columns, data, deleteSelected }) {
       <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
         <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
           <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+            <GlobalFilter
+              globalFilter={state.globalFilter}
+              setGlobalFilter={setGlobalFilter}
+            />
             <TableLayout
               getTableProps={getTableProps}
               headerGroups={headerGroups}
@@ -80,7 +80,7 @@ function TableInstance({ columns, data, deleteSelected }) {
             />
             <TableFooter
               deleteSelected={deleteSelected}
-              selectedRowIds={selectedRowIds}
+              selectedRowIds={state.selectedRowIds}
               gotoPage={gotoPage}
               previousPage={previousPage}
               nextPage={nextPage}
@@ -91,6 +91,35 @@ function TableInstance({ columns, data, deleteSelected }) {
         </div>
       </div>
     </div>
+  );
+}
+
+function GlobalFilter({ globalFilter, setGlobalFilter }) {
+  const [value, setValue] = useState(globalFilter);
+
+  // const onChange = useAsyncDebounce((value) => {
+  //   setGlobalFilter(value || undefined);
+  // }, 200);
+
+  const onChange = useDebouncedCallback((value) => {
+    setGlobalFilter(value || undefined);
+  }, 200);
+
+  return (
+    <span>
+      Search:{" "}
+      <input
+        value={value || ""}
+        onChange={(e) => {
+          setValue(e.target.value);
+          onChange(e.target.value);
+        }}
+        style={{
+          fontSize: "1.1rem",
+          border: "0",
+        }}
+      />
+    </span>
   );
 }
 

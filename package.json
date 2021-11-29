@@ -13,7 +13,8 @@
     "react-dom": "^17.0.0",
     "react-query": "^3.33.7",
     "react-table": "^7.7.0",
-    "tailwindcss": "^2.2.19"
+    "tailwindcss": "^2.2.19",
+    "use-debounce": "^7.0.1"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^1.0.0",
