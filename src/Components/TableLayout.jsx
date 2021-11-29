@@ -1,13 +1,16 @@
 const TableLayout = ({
+  selectedRowIds,
   getTableProps,
   headerGroups,
   getTableBodyProps,
   prepareRow,
   page,
 }) => {
+  const selectedRows = Object.keys(selectedRowIds);
+
   return (
     <table className="min-w-full divide-y divide-gray-200" {...getTableProps()}>
-      <thead className="bg-gray-50">
+      <thead className="bg-gray-100">
         {headerGroups.map((headerGroup) => (
           <tr {...headerGroup.getHeaderGroupProps()}>
             {headerGroup.headers.map((column) => (
@@ -28,7 +31,12 @@ const TableLayout = ({
         {page.map((row, i) => {
           prepareRow(row);
           return (
-            <tr className="px-6 py-4 whitespace-nowrap" {...row.getRowProps()}>
+            <tr
+              className={`px-6 py-4 whitespace-nowrap ${
+                selectedRows.includes(String(i)) ? "bg-gray-50" : ""
+              }`}
+              {...row.getRowProps()}
+            >
               {row.cells.map((cell) => {
                 return (
                   <td

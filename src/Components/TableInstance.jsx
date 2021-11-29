@@ -72,6 +72,7 @@ function TableInstance({ columns, data, deleteSelected }) {
               setGlobalFilter={setGlobalFilter}
             />
             <TableLayout
+              selectedRowIds={state.selectedRowIds}
               getTableProps={getTableProps}
               headerGroups={headerGroups}
               getTableBodyProps={getTableBodyProps}
