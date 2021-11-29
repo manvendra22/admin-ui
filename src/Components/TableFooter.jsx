@@ -5,12 +5,14 @@ const TableFooter = ({
   selectedRowIds,
   ...paginationProps
 }) => {
+  const selectedRows = Object.keys(selectedRowIds);
+
   return (
-    <div className="flex justify-between m-4">
+    <div className="flex justify-between m-5">
       <button
-        className="btn bg-red-500 text-white hover:bg-red-600"
-        onClick={() => deleteSelected(Object.keys(selectedRowIds))}
-        disabled={false}
+        className="btn bg-red-500 text-white hover:bg-red-600 disabled:opacity-50"
+        onClick={() => deleteSelected(selectedRows)}
+        disabled={selectedRows.length === 0}
       >
         Delete Selected
       </button>

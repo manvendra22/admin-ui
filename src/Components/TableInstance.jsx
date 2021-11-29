@@ -66,7 +66,7 @@ function TableInstance({ columns, data, deleteSelected }) {
     <div className="flex flex-col text-left">
       <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
         <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-          <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+          <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded">
             <GlobalFilter
               globalFilter={state.globalFilter}
               setGlobalFilter={setGlobalFilter}
@@ -106,20 +106,15 @@ function GlobalFilter({ globalFilter, setGlobalFilter }) {
   }, 200);
 
   return (
-    <span>
-      Search:{" "}
-      <input
-        value={value || ""}
-        onChange={(e) => {
-          setValue(e.target.value);
-          onChange(e.target.value);
-        }}
-        style={{
-          fontSize: "1.1rem",
-          border: "0",
-        }}
-      />
-    </span>
+    <input
+      value={value || ""}
+      onChange={(e) => {
+        setValue(e.target.value);
+        onChange(e.target.value);
+      }}
+      placeholder="Search by name, email or role"
+      className="px-3 py-3 placeholder-gray-400 text-gray-600 rounded text-sm border border-gray-400 outline-none focus:outline-none w-full"
+    />
   );
 }
 
