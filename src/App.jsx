@@ -1,7 +1,7 @@
 import { API_KEY } from "./config";
 import { useQuery } from "react-query";
 
-import Table from "./Components/Table/Table";
+import Table from "./Components/Table";
 
 function App() {
   const { isLoading, error, data } = useQuery("repoData", () =>

@@ -5,25 +5,21 @@ import TableLayout from "./TableLayout";
 import TableFooter from "./TableFooter";
 
 function TableInstance({ columns, data, deleteSelected }) {
-  // Use the state and functions returned from useTable to build your UI
   const {
     getTableProps,
     getTableBodyProps,
     headerGroups,
     prepareRow,
-    page, // Instead of using 'rows', we'll use page,
-    // which has only the rows for the active page
-
-    // The rest of these things are super handy, too ;)
+    page,
     canPreviousPage,
     canNextPage,
-    pageOptions,
-    pageCount,
+    // pageOptions,
+    // pageCount,
     gotoPage,
     nextPage,
     previousPage,
-    setPageSize,
-    selectedFlatRows,
+    // setPageSize,
+    // selectedFlatRows,
     state: { pageIndex, pageSize, selectedRowIds },
   } = useTable(
     {
@@ -57,7 +53,6 @@ function TableInstance({ columns, data, deleteSelected }) {
     }
   );
 
-  // Render the UI for your table
   return (
     <div className="flex flex-col text-left">
       <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">

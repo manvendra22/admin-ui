@@ -1,13 +1,9 @@
-import Pagination from "../Pagination";
+import Pagination from "./Pagination";
 
 const TableFooter = ({
   deleteSelected,
   selectedRowIds,
-  gotoPage,
-  previousPage,
-  nextPage,
-  canPreviousPage,
-  canNextPage,
+  ...paginationProps
 }) => {
   return (
     <div className="flex justify-between m-4">
@@ -18,13 +14,7 @@ const TableFooter = ({
       >
         Delete Selected
       </button>
-      <Pagination
-        gotoPage={gotoPage}
-        previousPage={previousPage}
-        nextPage={nextPage}
-        canPreviousPage={canPreviousPage}
-        canNextPage={canNextPage}
-      />
+      <Pagination {...paginationProps} />
     </div>
   );
 };
