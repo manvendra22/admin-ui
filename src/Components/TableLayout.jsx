@@ -2,8 +2,8 @@ const TableLayout = ({
   getTableProps,
   headerGroups,
   getTableBodyProps,
-  page,
   prepareRow,
+  page,
 }) => {
   return (
     <table className="min-w-full divide-y divide-gray-200" {...getTableProps()}>

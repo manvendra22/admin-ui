@@ -5,10 +5,10 @@ function Table({ data }) {
   const [newData, setNewData] = useState(data);
 
   function deleteSelected(selectedRowIds) {
-    const selectedRows = Object.keys(selectedRowIds);
+    console.log({ selectedRowIds });
 
     const updatedData = newData.filter((_, id) => {
-      return !selectedRows.includes(String(id));
+      return !selectedRowIds.includes(String(id));
     });
 
     setNewData(updatedData);
