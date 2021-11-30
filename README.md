@@ -1,5 +1,7 @@
 # admin-ui-geektrust
 
+## Geektrust Frontend Assignment [Admin UI]
+
 ### Tech stack
 
 - React

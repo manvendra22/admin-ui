@@ -11,12 +11,19 @@ const App = () => {
   );
 
   if (isLoading) {
-    return "Loading...";
+    return (
+      <div class="flex justify-center items-center h-screen">
+        <div
+          class="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-purple-500
+    "
+        ></div>
+      </div>
+    );
   }
 
   if (error) {
     console.error(error);
-    return "Error";
+    return <div className="text-red-500">Error: {error.message}</div>;
   }
 
   return (
