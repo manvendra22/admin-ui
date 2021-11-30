@@ -22,6 +22,7 @@ const TableInstance = ({ columns, data, updateData }) => {
     headerGroups,
     prepareRow,
     page,
+    pageCount,
     canPreviousPage,
     canNextPage,
     gotoPage,
@@ -111,6 +112,7 @@ const TableInstance = ({ columns, data, updateData }) => {
               updateSelected={updateSelected}
             />
             <TableFooter
+              pageCount={pageCount}
               gotoPage={gotoPage}
               previousPage={previousPage}
               nextPage={nextPage}

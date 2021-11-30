@@ -1,4 +1,5 @@
 const Pagination = ({
+  pageCount,
   gotoPage,
   previousPage,
   nextPage,
