@@ -4,7 +4,6 @@ import {
   usePagination,
   useRowSelect,
   useGlobalFilter,
-  // useAsyncDebounce,
 } from "react-table";
 
 import TableLayout from "./TableLayout";
