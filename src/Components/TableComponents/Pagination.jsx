@@ -7,6 +7,8 @@ const Pagination = ({
   canPreviousPage,
   canNextPage,
 }) => {
+  const pageArr = [...Array(pageCount).keys()];
+
   return (
     <div className="flex items-center justify-center text-purple-500">
       <button
@@ -33,7 +35,7 @@ const Pagination = ({
           ></path>
         </svg>
       </button>
-      {[...Array(pageCount)].map((_, i) => (
+      {pageArr.map((_, i) => (
         <button
           key={i}
           className={`btn disabled:opacity-50 ${
