@@ -4,6 +4,7 @@ import { useDebouncedCallback } from "use-debounce";
 const GlobalFilter = ({ globalFilter, setGlobalFilter }) => {
   const [value, setValue] = useState(globalFilter);
 
+  // Debounced function for setting the global filter
   const onChange = useDebouncedCallback((value) => {
     setGlobalFilter(value || undefined);
   }, 200);

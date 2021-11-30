@@ -27,6 +27,7 @@ const Table = ({ data }) => {
     updateData(updatedData);
   }
 
+  // Memoize api data [required for react-table]
   const [columns, tableData] = useMemo(() => {
     const columns = [
       {

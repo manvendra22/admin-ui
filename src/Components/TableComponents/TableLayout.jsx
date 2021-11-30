@@ -42,6 +42,7 @@ const TableLayout = ({
               }`}
               {...row.getRowProps()}
             >
+              {/* Editable row */}
               {editIndex === i ? (
                 <EditableRow
                   row={row}

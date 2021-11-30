@@ -2,6 +2,10 @@
 
 ## Geektrust Frontend Assignment [Admin UI]
 
+### Live link
+
+https://admin-ui-geek.netlify.app/
+
 ### Tech stack
 
 - React

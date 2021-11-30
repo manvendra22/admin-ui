@@ -6,6 +6,7 @@ const EditableCell = ({
   saveSelected,
 }) => {
   if (cell.column.id === "selection") {
+    // go back button in selection column
     return (
       <button className="text-red-500" onClick={() => editSelected(null)}>
         <svg width="1.4em" height="1.4em" viewBox="0 0 48 48">
@@ -23,6 +24,7 @@ const EditableCell = ({
   }
 
   if (cell.column.id === "actions") {
+    // save button in actions column
     return (
       <button
         className="btn text-indigo-600 hover:text-indigo-700"
