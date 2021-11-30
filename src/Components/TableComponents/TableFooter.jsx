@@ -1,4 +1,4 @@
-import Pagination from "./Utils/Pagination";
+import Pagination from "./Pagination";
 
 const TableFooter = ({
   deleteSelected,

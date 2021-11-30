@@ -6,13 +6,13 @@ import {
   useGlobalFilter,
 } from "react-table";
 
-import TableLayout from "./TableLayout";
-import TableFooter from "./TableFooter";
-import Actions from "./Utils/Actions";
-import GlobalFilter from "./Utils/GlobalFilter";
-import IndeterminateCheckbox from "./Utils/IndeterminateCheckbox";
+import TableLayout from "./TableComponents/TableLayout";
+import TableFooter from "./TableComponents/TableFooter";
+import Actions from "./TableComponents/Actions";
+import GlobalFilter from "./TableComponents/GlobalFilter";
+import IndeterminateCheckbox from "./TableComponents/IndeterminateCheckbox";
 
-const TableInstance = ({ columns, data, updateData }) => {
+const TableInstance = ({ columns, data, deleteSelected, updateSelected }) => {
   const [editIndex, setEditIndex] = useState(null);
 
   const {
@@ -66,28 +66,8 @@ const TableInstance = ({ columns, data, updateData }) => {
     }
   );
 
-  function deleteSelected(selectedRowIds) {
-    const updatedData = data.filter((_, id) => {
-      return !selectedRowIds.includes(String(id));
-    });
-
-    updateData(updatedData);
-  }
-
   function editSelected(i) {
     setEditIndex(i);
-  }
-
-  function updateSelected(values, rowId) {
-    const updatedData = data.map((row) => {
-      if (rowId === row.id) {
-        return values;
-      }
-      return row;
-    });
-
-    updateData(updatedData);
-    editSelected(null);
   }
 
   return (

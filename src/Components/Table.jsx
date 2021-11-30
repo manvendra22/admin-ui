@@ -8,6 +8,25 @@ const Table = ({ data }) => {
     setNewData(updatedData);
   }
 
+  function deleteSelected(selectedRowIds) {
+    const updatedData = data.filter((_, id) => {
+      return !selectedRowIds.includes(String(id));
+    });
+
+    updateData(updatedData);
+  }
+
+  function updateSelected(values, rowId) {
+    const updatedData = data.map((row) => {
+      if (rowId === row.id) {
+        return values;
+      }
+      return row;
+    });
+
+    updateData(updatedData);
+  }
+
   const [columns, tableData] = useMemo(() => {
     const columns = [
       {
@@ -27,7 +46,12 @@ const Table = ({ data }) => {
   }, [newData]);
 
   return (
-    <TableInstance columns={columns} data={tableData} updateData={updateData} />
+    <TableInstance
+      columns={columns}
+      data={tableData}
+      deleteSelected={deleteSelected}
+      updateSelected={updateSelected}
+    />
   );
 };
 

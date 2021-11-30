@@ -1,4 +1,4 @@
-import EditableRow from "./Utils/EditableRow";
+import EditableRow from "./EditableRow";
 
 const TableLayout = ({
   selectedRowIds,

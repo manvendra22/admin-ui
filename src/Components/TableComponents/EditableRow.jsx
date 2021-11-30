@@ -6,6 +6,7 @@ const EditableRow = ({ row, editSelected, updateSelected }) => {
 
   function saveSelected() {
     updateSelected(values, row.original.id);
+    editSelected(null);
   }
 
   return row.cells.map((cell) => {
