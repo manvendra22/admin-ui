@@ -42,24 +42,24 @@ const TableLayout = ({
               }`}
               {...row.getRowProps()}
             >
-              {row.cells.map((cell) => {
-                return (
-                  <td
-                    className="px-6 py-4 text-sm text-gray-800"
-                    {...cell.getCellProps()}
-                  >
-                    {editIndex === i ? (
-                      <Editable
-                        cell={cell}
-                        editSelected={editSelected}
-                        updateSelected={updateSelected}
-                      />
-                    ) : (
-                      cell.render("Cell")
-                    )}
-                  </td>
-                );
-              })}
+              {editIndex === i ? (
+                <EditableRow
+                  row={row}
+                  editSelected={editSelected}
+                  updateSelected={updateSelected}
+                />
+              ) : (
+                row.cells.map((cell) => {
+                  return (
+                    <td
+                      className="px-6 py-4 text-sm text-gray-800"
+                      {...cell.getCellProps()}
+                    >
+                      {cell.render("Cell")}
+                    </td>
+                  );
+                })
+              )}
             </tr>
           );
         })}
@@ -68,9 +68,35 @@ const TableLayout = ({
   );
 };
 
-const Editable = ({ cell, editSelected, updateSelected }) => {
-  const [value, setValue] = useState(cell.value);
+const EditableRow = ({ row, editSelected, updateSelected }) => {
+  const [values, setValues] = useState(row.values);
 
+  function saveSelected() {
+    updateSelected(values, row.original.id);
+  }
+
+  return row.cells.map((cell) => {
+    return (
+      <td className="px-6 py-4 text-sm text-gray-800" {...cell.getCellProps()}>
+        <EditableCell
+          cell={cell}
+          values={values}
+          setValues={setValues}
+          editSelected={editSelected}
+          saveSelected={saveSelected}
+        />
+      </td>
+    );
+  });
+};
+
+const EditableCell = ({
+  cell,
+  values,
+  setValues,
+  editSelected,
+  saveSelected,
+}) => {
   if (cell.column.id === "selection") {
     return (
       <button className="text-red-500" onClick={() => editSelected(null)}>
@@ -99,17 +125,14 @@ const Editable = ({ cell, editSelected, updateSelected }) => {
     );
   }
 
-  function saveSelected() {
-    updateSelected(value, cell.column.id);
-    editSelected(null);
+  const value = values[cell.column.id];
+
+  function updateValues(e) {
+    setValues({ ...values, [cell.column.id]: e.target.value });
   }
 
   return (
-    <input
-      className="input px-2 py-1"
-      value={value}
-      onChange={(e) => setValue(e.target.value)}
-    />
+    <input className="input px-2 py-1" value={value} onChange={updateValues} />
   );
 };
 

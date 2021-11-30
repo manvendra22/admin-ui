@@ -67,7 +67,7 @@ const TableInstance = ({ columns, data, updateData }) => {
   );
 
   function deleteSelected(selectedRowIds) {
-    const updatedData = newData.filter((_, id) => {
+    const updatedData = data.filter((_, id) => {
       return !selectedRowIds.includes(String(id));
     });
 
@@ -78,7 +78,17 @@ const TableInstance = ({ columns, data, updateData }) => {
     setEditIndex(i);
   }
 
-  function updateSelected() {}
+  function updateSelected(values, rowId) {
+    const updatedData = data.map((row) => {
+      if (rowId === row.id) {
+        return values;
+      }
+      return row;
+    });
+
+    updateData(updatedData);
+    editSelected(null);
+  }
 
   return (
     <div className="flex flex-col text-left">
