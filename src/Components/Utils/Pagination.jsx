@@ -1,5 +1,6 @@
 const Pagination = ({
   pageCount,
+  pageIndex,
   gotoPage,
   previousPage,
   nextPage,
@@ -32,6 +33,17 @@ const Pagination = ({
           ></path>
         </svg>
       </button>
+      {[...Array(pageCount)].map((_, i) => (
+        <button
+          key={i}
+          className={`btn disabled:opacity-50 ${
+            pageIndex === i ? "text-purple-800" : ""
+          }`}
+          onClick={() => gotoPage(i)}
+        >
+          {i + 1}
+        </button>
+      ))}
       <button
         className="btn disabled:opacity-50"
         onClick={() => nextPage()}

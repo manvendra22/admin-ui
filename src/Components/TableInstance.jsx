@@ -113,6 +113,7 @@ const TableInstance = ({ columns, data, updateData }) => {
             />
             <TableFooter
               pageCount={pageCount}
+              pageIndex={state.pageIndex}
               gotoPage={gotoPage}
               previousPage={previousPage}
               nextPage={nextPage}
