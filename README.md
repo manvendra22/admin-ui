@@ -13,22 +13,22 @@
 
 ### Installation
 
-It requires Node and NPM to run.
+It requires Node and NPM/Yarn to run.
 Clone the project from github.
 
     $ git clone https://github.com/manvendra22/admin-ui-geektrust.git
     $ cd admin-ui-geektrust
-    $ npm install
+    $ yarn
 
 ### Available scripts
 
 In the project directory, you can run:
 
-#### `npm start`
+#### `yarn dev`
 
 Runs the app in the development mode.<br />
 Open http://localhost:3000 to view it in the browser.
 
-#### `npm run build`
+#### `yarn build`
 
 Builds the app for production to the `build` folder.
