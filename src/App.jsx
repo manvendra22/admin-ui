@@ -3,7 +3,7 @@ import { useQuery } from "react-query";
 
 import Table from "./Components/Table";
 
-function App() {
+const App = () => {
   const { isLoading, error, data } = useQuery("repoData", () =>
     fetch(API_KEY).then((res) => {
       return res.json();
@@ -24,6 +24,6 @@ function App() {
       <Table data={data} />
     </div>
   );
-}
+};
 
 export default App;

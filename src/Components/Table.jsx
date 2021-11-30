@@ -1,16 +1,10 @@
 import { useState, useMemo } from "react";
 import TableInstance from "./TableInstance";
 
-function Table({ data }) {
+const Table = ({ data }) => {
   const [newData, setNewData] = useState(data);
 
-  function deleteSelected(selectedRowIds) {
-    console.log({ selectedRowIds });
-
-    const updatedData = newData.filter((_, id) => {
-      return !selectedRowIds.includes(String(id));
-    });
-
+  function updateData(updatedData) {
     setNewData(updatedData);
   }
 
@@ -33,12 +27,8 @@ function Table({ data }) {
   }, [newData]);
 
   return (
-    <TableInstance
-      columns={columns}
-      data={tableData}
-      deleteSelected={deleteSelected}
-    />
+    <TableInstance columns={columns} data={tableData} updateData={updateData} />
   );
-}
+};
 
 export default Table;

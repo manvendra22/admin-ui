@@ -16,7 +16,7 @@ const GlobalFilter = ({ globalFilter, setGlobalFilter }) => {
         onChange(e.target.value);
       }}
       placeholder="Search by name, email or role"
-      className="px-3 py-3 placeholder-gray-400 text-gray-600 rounded text-sm border border-gray-400 outline-none focus:outline-none w-full"
+      className="input px-3 py-3"
     />
   );
 };

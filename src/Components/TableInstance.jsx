@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   useTable,
   usePagination,
@@ -12,7 +13,9 @@ import Actions from "./Utils/Actions";
 import GlobalFilter from "./Utils/GlobalFilter";
 import IndeterminateCheckbox from "./Utils/IndeterminateCheckbox";
 
-function TableInstance({ columns, data, deleteSelected }) {
+const TableInstance = ({ columns, data, updateData }) => {
+  const [editIndex, setEditIndex] = useState(null);
+
   const {
     getTableProps,
     getTableBodyProps,
@@ -39,14 +42,10 @@ function TableInstance({ columns, data, deleteSelected }) {
         {
           id: "selection",
           Header: ({ getToggleAllPageRowsSelectedProps }) => (
-            <div>
-              <IndeterminateCheckbox {...getToggleAllPageRowsSelectedProps()} />
-            </div>
+            <IndeterminateCheckbox {...getToggleAllPageRowsSelectedProps()} />
           ),
           Cell: ({ row }) => (
-            <div>
-              <IndeterminateCheckbox {...row.getToggleRowSelectedProps()} />
-            </div>
+            <IndeterminateCheckbox {...row.getToggleRowSelectedProps()} />
           ),
         },
         ...columns,
@@ -55,7 +54,11 @@ function TableInstance({ columns, data, deleteSelected }) {
           Header: () => <div>Actions</div>,
           Cell: ({ row }) => (
             <div>
-              <Actions row={row} deleteSelected={deleteSelected} />
+              <Actions
+                row={row}
+                editSelected={editSelected}
+                deleteSelected={deleteSelected}
+              />
             </div>
           ),
         },
@@ -63,37 +66,54 @@ function TableInstance({ columns, data, deleteSelected }) {
     }
   );
 
+  function deleteSelected(selectedRowIds) {
+    const updatedData = newData.filter((_, id) => {
+      return !selectedRowIds.includes(String(id));
+    });
+
+    updateData(updatedData);
+  }
+
+  function editSelected(i) {
+    setEditIndex(i);
+  }
+
+  function updateSelected() {}
+
   return (
     <div className="flex flex-col text-left">
       <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
         <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-          <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded">
+          <div className="shadow border-b border-gray-200 sm:rounded">
             <GlobalFilter
               globalFilter={state.globalFilter}
               setGlobalFilter={setGlobalFilter}
             />
             <TableLayout
-              selectedRowIds={state.selectedRowIds}
               getTableProps={getTableProps}
               headerGroups={headerGroups}
               getTableBodyProps={getTableBodyProps}
               page={page}
               prepareRow={prepareRow}
+              selectedRowIds={state.selectedRowIds}
+              editIndex={editIndex}
+              editSelected={editSelected}
+              updateSelected={updateSelected}
             />
             <TableFooter
-              deleteSelected={deleteSelected}
-              selectedRowIds={state.selectedRowIds}
               gotoPage={gotoPage}
               previousPage={previousPage}
               nextPage={nextPage}
               canPreviousPage={canPreviousPage}
               canNextPage={canNextPage}
+              selectedRowIds={state.selectedRowIds}
+              deleteSelected={deleteSelected}
             />
           </div>
         </div>
       </div>
     </div>
   );
-}
+};
 
 export default TableInstance;

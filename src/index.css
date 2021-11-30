@@ -31,3 +31,16 @@ code {
     transition-all
     duration-150;
 }
+
+.input {
+  @apply placeholder-gray-400
+  text-gray-600
+    rounded
+    text-sm
+    border
+  border-gray-400
+    outline-none
+    focus:outline-none
+    focus:ring
+    w-full;
+}

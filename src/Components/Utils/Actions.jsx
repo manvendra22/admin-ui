@@ -1,7 +1,10 @@
-const Actions = ({ row, deleteSelected }) => {
+const Actions = ({ row, deleteSelected, editSelected }) => {
   return (
     <div className="flex">
-      <button className="btn text-blue-500 hover:text-blue-600">
+      <button
+        className="btn text-blue-500 hover:text-blue-600"
+        onClick={() => editSelected(row.index)}
+      >
         <svg width="1.4em" height="1.4em" viewBox="0 0 48 48">
           <g
             fill="none"
