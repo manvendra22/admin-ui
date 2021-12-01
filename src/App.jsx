@@ -1,11 +1,11 @@
-import { API_KEY } from "./config";
+import { API } from "./config";
 import { useQuery } from "react-query";
 
 import Table from "./Components/Table";
 
 const App = () => {
   const { isLoading, error, data } = useQuery("repoData", () =>
-    fetch(API_KEY).then((res) => {
+    fetch(API).then((res) => {
       return res.json();
     })
   );
