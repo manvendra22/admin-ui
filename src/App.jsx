@@ -1,5 +1,5 @@
-import { API } from "./config";
 import { useQuery } from "react-query";
+import { API } from "./config";
 
 import Table from "./Components/Table";
 
